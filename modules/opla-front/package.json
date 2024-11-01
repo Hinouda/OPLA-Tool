@@ -1,0 +1,50 @@
+{
+  "name": "project",
+  "version": "2.1.0-RELEASE",
+  "scripts": {
+    "build:copy": "ng build --prod && cp -r dist/opla-front/* ../modules/opla-api/src/main/resources/static/"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~13.3.9",
+    "@angular/cdk": "~13.3.9",
+    "@angular/common": "~13.3.9",
+    "@angular/compiler": "~13.3.9",
+    "@angular/core": "~13.3.9",
+    "@angular/forms": "~13.3.9",
+    "@angular/material": "~13.3.9",
+    "@angular/platform-browser": "~13.3.9",
+    "@angular/platform-browser-dynamic": "~13.3.9",
+    "@angular/router": "~13.3.9",
+    "@swimlane/ngx-charts": "^12.1.0",
+    "@types/ws": "8.5.4",
+    "hammerjs": "^2.0.8",
+    "rxjs": "~7.5.5",
+    "rxjs-compat": "^6.6.3",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~13.3.9",
+    "@angular/cli": "~13.3.9",
+    "@angular/compiler-cli": "~13.3.9",
+    "@angular/flex-layout": "~13.0.0-beta.36",
+    "@angular/language-service": "^11.0.0",
+    "@types/jasmine": "~3.10.3",
+    "@types/jasminewd2": "^2.0.8",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^6.0.1",
+    "jasmine-core": "~4.2.0",
+    "jasmine-spec-reporter": "^6.0.0",
+    "karma": "~6.3.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "^3.0.3",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "protractor": "^7.0.0",
+    "ts-node": "^9.0.0",
+    "tslint": "^6.1.3",
+    "typescript": "~4.6.2"
+  }
+}

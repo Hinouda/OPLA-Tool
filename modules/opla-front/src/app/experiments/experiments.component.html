@@ -1,0 +1,104 @@
+<opla-grid-list>
+  <opla-grid-title style="width: 100%">
+    <table mat-table
+           [dataSource]="experiments" multiTemplateDataRows
+           class="mat-elevation-z8">
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+        <th mat-header-cell *matHeaderCellDef> {{column | titlecase}}</th>
+        <td mat-cell *matCellDef="let element" style="border: 0"> {{element[column]}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element;" [attr.colspan]="columnsToDisplay.length">
+          <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
+            <div class="table-column-element-detail">
+              <div class="table-column-element-diagram">
+                <div class="example-element-position"> {{element.id}} </div>
+                <div class="table-column-element-symbol"> {{element.name}} </div>
+                <div class="example-element-name"> {{element.algorithm}} </div>
+                <div class="example-element-weight"> {{element.createdAt}} </div>
+              </div>
+              <div class="table-column-element-description">
+                <button mat-icon-button color="primary" aria-label="Download PLA alternatives"
+                        (click)="download.emit(element.hash)">
+                  <mat-icon>get_app</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" aria-label="Download Info Json" (click)="downloadInfo(element)">
+                  <mat-icon>description</mat-icon>
+                </button>
+                <br>
+                <div class="pla-info"
+                     *ngFor="let experimentConfiguration of (element.experimentConfiguration | async)?.values">
+                  <div>
+                    Number of Runs: {{experimentConfiguration.numberOfRuns}}
+                  </div>
+                  <div>
+                    Max Evaluations: {{experimentConfiguration.maxEvaluations}}
+                  </div>
+                  <div>
+                    Crossover Probability: {{experimentConfiguration.crossoverProb}}
+                  </div>
+                  <div>
+                    Mutation Probability: {{experimentConfiguration.mutationProb}}
+                  </div>
+                  <div>
+                    Objective Functions: {{experimentConfiguration.objectives}}
+                  </div>
+                  <div>
+                    Mutation Operators: {{experimentConfiguration.mutationOperators | replaceall:'Mutation':''}}
+                  </div>
+                  <div>
+                    Population Size: {{experimentConfiguration.populationSize}}
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2>Solutions:</h2>
+              <div *ngFor="let executions of (element.info | async)?.values; let i = index">
+                <div *ngIf="executions[0].execution"><h3>Execution {{i + 1}}</h3></div>
+                <div *ngIf="!executions[0].execution"><h3>Non-dominated solutions after {{i}} executions</h3></div>
+                <opla-grid-list>
+                  <opla-grid-tile *ngFor="let info of executions; let j = index" style="max-width: 250px; margin-bottom: 10px;">
+                    <mat-card>
+                      <mat-card-content>
+                        <span [matBadge]="info.isAll ? '*' : null"
+                              matBadgeOverlap="false"> {{info.name | replaceall:'INFO_':''}} </span>
+                        <br><br>
+                        <b>Nr. Packages:</b> {{info.numberOfPackages || 0}}<br>
+                        <b>Nr. Classes:</b> {{info.numberOfClasses || 0}}<br>
+                        <b>Nr. Variabilities:</b> {{info.numberOfVariabilities || 0}}<br>
+                        <b>Nr. Interfaces:</b> {{info.numberOfInterfaces || 0}}<br>
+                        <b>Nr. Dependencies:</b> {{info.numberOfDependencies || 0}}<br>
+                        <b>Nr. Abstractions:</b> {{info.numberOfAbstractions || 0}}<br>
+                        <b>Nr. Generalizations:</b> {{info.numberOfGeneralizations || 0}}<br>
+                        <b>Nr. Associations:</b> {{info.numberOfAssociations || 0}}<br>
+                        <b>User Evaluation:</b> {{info.userEvaluation || 0}}<br>
+                        <b>Freezed Elements:</b> {{info.freezedElements}}<br>
+                        <b>Objective Values:</b> {{info.objectives}}<br>
+                      </mat-card-content>
+                    </mat-card>
+                  </opla-grid-tile>
+                </opla-grid-list>
+                <br>
+                <!--                <div>-->
+
+                <!--                </div>-->
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay; "
+          class="element-row"
+          [class.example-expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element; showInfo(element);">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+  </opla-grid-title>
+</opla-grid-list>

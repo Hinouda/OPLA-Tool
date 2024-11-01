@@ -1,0 +1,19 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Objective Functions</h2>
+    <div class="scrollable-list">
+      <div *ngFor="let checkbox of checkboxes">
+        <input type="checkbox" [(ngModel)]="checkbox.checked" />
+        <label [attr.title]="checkbox.tooltip">{{ checkbox.name }}</label>
+        <p>{{ checkbox.recommendation }}</p>
+      </div>
+    </div>
+    <p>{{ accumulatedMessage }}</p>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="autofill()">Autofill</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

@@ -1,0 +1,57 @@
+<opla-grid-list>
+  <opla-grid-tile>
+    <mat-card>
+      <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Experiment selection">
+          <mat-chip
+            *ngFor="let experiment of selectedExperiments"
+            [selectable]="true"
+            [removable]="true"
+            (removed)="remove(experiment)">
+            {{experiment.id}} - {{experiment.name}} - {{experiment.createdAt}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Select the experiments..."
+            #experimentInput
+            (focus)="searchExperiments()"
+            [formControl]="experimentCtrl"
+            [matChipInputFor]="chipList"
+            [matAutocomplete]="auto"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let element of filteredExperiments | async" [value]="element">
+            {{element.id}} - {{element.name}} - {{element.createdAt}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-card>
+  </opla-grid-tile>
+</opla-grid-list>
+<br>
+<opla-grid-list *ngIf="selectedExperiments && selectedExperiments.length > 0">
+  <opla-grid-tile style="height: 500px">
+    <mat-card style="height: 100%">
+      <mat-card-content style="height: 500px">
+        <div class="title-chart">
+          <h3>Parallel Coordinates</h3>
+        </div>
+        <div id="opla-d3-parallel-chart" class="parcoords"></div>
+      </mat-card-content>
+    </mat-card>
+  </opla-grid-tile>
+  <opla-grid-tile style="height: 500px">
+    <mat-card style="height: 500px">
+      <mat-card-content>
+        <div class="title-chart">
+          <h3>Boxplot</h3>
+        </div>
+        <div id="opla-d3-boxplot-chart" class="boxplotcoords"></div>
+      </mat-card-content>
+    </mat-card>
+  </opla-grid-tile>
+<!--  <opla-grid-tile></opla-grid-tile>-->
+</opla-grid-list>
+<br>

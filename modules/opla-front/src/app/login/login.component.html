@@ -1,0 +1,40 @@
+<opla-grid-list>
+  <opla-grid-tile style="display:flex; justify-content: center;">
+    <mat-card class="login-card">
+      <mat-card-header style="width: 100%; display: flex; justify-content: center; height: 60px; align-items: center;">
+        <mat-card-title>
+            <img style="width: 150px" src="assets/logo.png" alt="favicon">
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="loginForm">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>User</mat-label>
+            <input matInput placeholder="Usuário" name="username"
+                   formControlName="loginInput"
+                   (keydown.enter)="login()"
+                   required>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Senha" type="password" name="password"
+                   formControlName="passwordInput"
+                   (keydown.enter)="login()"
+                   required>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions style="display: flex; justify-content: space-between;">
+        <button mat-button (click)="forgot()">I forgot my password</button>
+        <button mat-raised-button (click)="login()" color="primary">
+          <mat-icon [style.display]="showSpinner ? 'inline-block' : 'none'">
+            <mat-spinner color="warn" diameter="20"></mat-spinner>
+          </mat-icon>
+          Login
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </opla-grid-tile>
+</opla-grid-list>
+

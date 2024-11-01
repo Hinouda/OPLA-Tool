@@ -1,0 +1,13 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Inserir PLA</h2>
+    <input type="file" (change)="onFileSelected($event)" accept=".smty">
+    <p>{{ fileName }}</p>
+    <div class="actions">
+     
+      <button (click)="closeDialog()">Back</button>
+      <button (click)="openObjectiveFunctions()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

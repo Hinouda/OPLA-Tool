@@ -1,0 +1,33 @@
+<div class="dialog">
+  <button class="close-button" (click)="closeDialog()">X</button>
+  <h2 class="title">Settings</h2>
+  <div class="content">
+      <div class="form-group">
+          <label for="algorithm">Select the Optimization Algorithm:</label>
+          <select id="algorithm" [(ngModel)]="algorithm">
+              <option *ngFor="let alg of algorithms" [value]="alg">{{ alg }}</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label for="runs">Number of Runs:</label>
+          <input type="number" id="runs" [(ngModel)]="runs">
+          <!-- <p>Our recommendation is {{ result.getRuns() }}</p> -->
+      </div>
+      <div class="form-group">
+          <label for="evaluations">Number of Fitness Evaluations:</label>
+          <input type="number" id="evaluations" [(ngModel)]="evaluations">
+          <!-- <p>Our recommendation is {{ result.getNumberOfFitnessEvaluations() }}</p> -->
+      </div>
+      <div class="form-group">
+          <label for="population">Population Size:</label>
+          <input type="number" id="population" [(ngModel)]="population">
+          <!-- <p>Our recommendation is {{ result.getPopulationSize() }}</p> -->
+      </div>
+  </div>
+  <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="autofill()">Autofill</button>
+      <button (click)="onNext()">Next</button>
+  </div>
+  <ng-template #host></ng-template>
+</div>

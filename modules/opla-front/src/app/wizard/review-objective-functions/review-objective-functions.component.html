@@ -1,0 +1,16 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Review Objective Functions</h2>
+    <div class="content">
+      <!-- Exiba as funções objetivas selecionadas -->
+      <ul>
+        <li *ngFor="let function of selectedFunctions">{{ function }}</li>
+      </ul>
+    </div>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

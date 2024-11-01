@@ -1,0 +1,40 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Crossover Operators</h2>
+  
+    <label for="crossoverRate">Crossover rate (0.0 to 1.0):</label>
+    <input type="range" id="crossoverRate" min="0" max="10" step="1" [(ngModel)]="crossoverRate" (input)="onCrossoverRateChange(crossoverRate)">
+    <p>Our recommendation is: {{ result.crossoverRate }}</p>
+  
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="featureDriven" [disabled]="crossoverRate <= 0">
+        PLA Feature-Driven Crossover
+      </label>
+      <p>Our recommendation is: {{ result.featureDrivenCrossover ? 'Yes' : 'No' }}</p>
+    </div>
+  
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="complementary" [disabled]="crossoverRate <= 0">
+        PLA Complementary Crossover
+      </label>
+      <p>Our recommendation is: {{ result.complementaryCrossover ? 'Yes' : 'No' }}</p>
+    </div>
+  
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="modular" [disabled]="crossoverRate <= 0">
+        PLA Modular Crossover
+      </label>
+      <p>Our recommendation is: {{ result.modularCrossover ? 'Yes' : 'No' }}</p>
+    </div>
+  
+    <div class="actions">
+      <button (click)="autofillSettings()">Autofill</button>
+      <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

@@ -1,0 +1,17 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Review Interactions</h2>
+    <div class="content">
+      <p><strong>Interact:</strong> {{ interact }}</p>
+      <p><strong>Clustering Algorithm:</strong> {{ clusteringAlgorithm }}</p>
+      <p><strong>Clustering Moment:</strong> {{ clusteringMoment }}</p>
+      <p><strong>Max Interactions:</strong> {{ maxInteractions }}</p>
+      <p><strong>First Interaction:</strong> {{ firstInteraction }}</p>
+      <p><strong>Interval:</strong> {{ interval }}</p>
+    </div>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

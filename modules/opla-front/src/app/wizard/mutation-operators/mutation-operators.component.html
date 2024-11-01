@@ -1,0 +1,27 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Mutation Operators</h2>
+    <div class="scrollable-list">
+      <div>
+        <label>Mutation rate (0.0 to 1.0):</label>
+        <input type="range" min="0" max="10" [(ngModel)]="mutationRate" (input)="onMutationRateChange($event.target.value)">
+        <span>{{ mutationRate / 10 }}</span>
+      </div>
+      <div *ngIf="mutationRate > 0">
+        <label><input type="checkbox" [(ngModel)]="featureDriven"> Feature-driven Operator</label>
+        <label><input type="checkbox" [(ngModel)]="moveMethod"> Move Method Mutation</label>
+        <label><input type="checkbox" [(ngModel)]="moveAttribute"> Move Attribute Mutation</label>
+        <label><input type="checkbox" [(ngModel)]="moveOperation"> Move Operation Mutation</label>
+        <label><input type="checkbox" [(ngModel)]="addClass"> Add Class Mutation</label>
+        <label><input type="checkbox" [(ngModel)]="addManagerClass"> Add Manager Class Mutation</label>
+        <label><input type="checkbox" [(ngModel)]="featureDrivenForClass"> Feature-driven Operator For Class</label>
+      </div>
+    </div>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="autofillSettings()">Autofill</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

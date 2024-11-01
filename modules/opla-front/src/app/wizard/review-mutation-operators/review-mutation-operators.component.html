@@ -1,0 +1,20 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Review Mutation Operators</h2>
+    <div class="content">
+      <p>Feature-driven Operator: {{ featureDriven ? 'Yes' : 'No' }}</p>
+      <p>Move Method Mutation: {{ moveMethod ? 'Yes' : 'No' }}</p>
+      <p>Move Attribute Mutation: {{ moveAttribute ? 'Yes' : 'No' }}</p>
+      <p>Move Operation Mutation: {{ moveOperation ? 'Yes' : 'No' }}</p>
+      <p>Add Class Mutation: {{ addClass ? 'Yes' : 'No' }}</p>
+      <p>Add Manager Class Mutation: {{ addManagerClass ? 'Yes' : 'No' }}</p>
+      <p>Feature-driven Operator For Class: {{ featureDrivenForClass ? 'Yes' : 'No' }}</p>
+      <p>Mutation Rate: {{ mutationRate }}</p>
+    </div>
+    <div class="actions">
+        <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

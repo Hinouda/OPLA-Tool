@@ -1,0 +1,245 @@
+<opla-grid-list>
+  <opla-grid-tile>
+    <div class="example-container" *ngIf="optimizationDto">
+      <form [formGroup]="formGroup">
+        <opla-grid-list>
+          <opla-grid-tile>
+            <mat-card>
+              <h5>Settings</h5>
+              <div>
+                <mat-form-field>
+                  <mat-label>Select the Optimization Algorithm</mat-label>
+                  <mat-select [(value)]="optimizationDto.algorithm">
+                    <mat-option *ngFor="let alg of optimizationOptions?.algorithms" [value]="alg">
+                      {{alg | replaceall:'_':' '}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field [floatLabel]="floatLabelControl.value">
+                  <mat-label>Number of runs</mat-label>
+                  <input matInput placeholder="30..." [(ngModel)]="optimizationDto.numberRuns"
+                         formControlName="numberRuns">
+                  <mat-error *ngIf="formGroup.get('numberRuns').hasError('required')">
+                    Number of runs is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field [floatLabel]="floatLabelControl.value">
+                  <mat-label>Number of fitness evaluations</mat-label>
+                  <input matInput placeholder="30000..." [(ngModel)]="optimizationDto.maxEvaluations"
+                         formControlName="maxEvaluations">
+                  <mat-error *ngIf="formGroup.get('maxEvaluations').hasError('required')">
+                    Number of fitness evaluations is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field [floatLabel]="floatLabelControl.value">
+                  <mat-label>Population Size</mat-label>
+                  <input matInput placeholder="200..." [(ngModel)]="optimizationDto.populationSize"
+                         formControlName="populationSize">
+                  <mat-error *ngIf="formGroup.get('populationSize').hasError('required')">
+                    Population size is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field [floatLabel]="floatLabelControl.value" *ngIf="optimizationDto.algorithm === 'PAES'">
+                  <mat-label>Archive size</mat-label>
+                  <input matInput placeholder="2..." [(ngModel)]="optimizationDto.archiveSize"
+                         formControlName="archiveSize">
+                </mat-form-field>
+              </div>
+            </mat-card>
+          </opla-grid-tile>
+          <opla-grid-tile>
+            <mat-card>
+              <h5>
+                Objective Functions
+                <mat-error style="font-weight: 400;" *ngIf="optimizationDto?.objectiveFunctions?.length <= 0">
+                  At least one objective function is <strong>required</strong>
+                </mat-error>
+              </h5>
+              <opla-grid-list class="operators-functions">
+                <opla-grid-tile *ngFor="let obj of optimizationOptions?.objectiveFunctions">
+                  <mat-checkbox [checked]="isObjFunctionChecked(obj)"
+                                [oplaI18n]="obj"
+                                (change)="changeObjFunction(obj, $event.checked)">
+                    <span>{{obj}}</span>
+                  </mat-checkbox>
+                </opla-grid-tile>
+              </opla-grid-list>
+              <br>
+              <opla-grid-list>
+                <opla-grid-tile style="justify-content: center">
+                  <button (click)="getSuggestion()" style="width: 60%" mat-flat-button color="primary"><mat-icon>lightbulb</mat-icon>&nbsp;Get a suggestion</button>
+                </opla-grid-tile>
+              </opla-grid-list>
+            </mat-card>
+          </opla-grid-tile>
+          <opla-grid-tile>
+            <mat-card>
+              <h5>Interaction - Learning Settings</h5>
+              <div>
+                <mat-checkbox [checked]="optimizationDto.interactive"
+                              (change)="optimizationDto.interactive = $event.checked; emit(optimizationDto); setInteractionParams($event.checked, optimizationDto); ">
+                  Interact during the optimization
+                </mat-checkbox>
+                <mat-form-field>
+                  <mat-label>Select the clustering algorithm</mat-label>
+                  <mat-select [(value)]="optimizationDto.clusteringAlgorithm">
+                    <mat-option value="KMEANS">KMEANS</mat-option>
+                    <mat-option value="DBSCAN">DBSCAN</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Select the clustering moment</mat-label>
+                  <mat-select [(value)]="optimizationDto.clusteringMoment">
+                    <mat-option value="INTERACTIVE">INTERACTIVE</mat-option>
+                    <mat-option value="POSTERIORI">POSTERIORI</mat-option>
+                    <mat-option value="BOTH">BOTH</mat-option>
+                    <mat-option value="NONE">NONE</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <opla-grid-list class="operators-functions">
+                  <opla-grid-tile>
+                    <mat-form-field [floatLabel]="floatLabelControl.value">
+                      <mat-label>Max interactions</mat-label>
+                      <input matInput placeholder="3..." [(ngModel)]="optimizationDto.maxInteractions"
+                             formControlName="maxInteractions">
+                    </mat-form-field>
+                  </opla-grid-tile>
+                  <opla-grid-tile>
+                    <mat-form-field [floatLabel]="floatLabelControl.value">
+                      <mat-label>First interaction</mat-label>
+                      <input matInput placeholder="3..." [(ngModel)]="optimizationDto.firstInteraction"
+                             formControlName="firstInteraction">
+                    </mat-form-field>
+                  </opla-grid-tile>
+                  <opla-grid-tile>
+                    <mat-form-field [floatLabel]="floatLabelControl.value">
+                      <mat-label>Interval</mat-label>
+                      <input matInput placeholder="3..." [(ngModel)]="optimizationDto.intervalInteraction"
+                             formControlName="intervalInteraction">
+                    </mat-form-field>
+                  </opla-grid-tile>
+                </opla-grid-list>
+              </div>
+            </mat-card>
+          </opla-grid-tile>
+        </opla-grid-list>
+        <opla-grid-list>
+          <opla-grid-tile>
+            <mat-card>
+              <h5>Crossover Operators</h5>
+              <opla-grid-list>
+                <opla-grid-tile style="align-items: center;">
+                  <mat-checkbox [(ngModel)]="optimizationDto.crossover"
+                                formControlName="crossover">Crossover rate
+                  </mat-checkbox>&nbsp;
+                  <span class="slider-number">0</span>&nbsp;
+                  <mat-slider
+                    [disabled]="false"
+                    [invert]="false"
+                    [max]="1"
+                    [min]="0"
+                    formControlName="crossoverProbability"
+                    [step]="0.1"
+                    [thumbLabel]="true"
+                    [(ngModel)]="optimizationDto.crossoverProbability"
+                    [vertical]="false">
+                  </mat-slider>
+                  <span class="slider-number">1</span>
+                </opla-grid-tile>
+              </opla-grid-list>
+              <opla-grid-list>
+                <opla-grid-tile *ngFor="let fmo of optimizationOptions?.crossoverOperators">
+                    <mat-checkbox
+                      [disabled]="!optimizationDto.crossover"
+                      (change)="changeOperators('crossoverOperators', fmo, $event.checked)">
+                      {{fmo | replaceall:'_':' '}}
+                    </mat-checkbox>
+                </opla-grid-tile>
+              </opla-grid-list>
+            </mat-card>
+          </opla-grid-tile>
+          <opla-grid-tile>
+            <mat-card>
+              <h5>
+                Mutation Operators
+                <mat-error style="font-weight: 400;" *ngIf="optimizationDto.mutationOperators.length <= 0">
+                  At least one mutation operator is <strong>required</strong>
+                </mat-error>
+              </h5>
+              <opla-grid-list>
+                <opla-grid-tile style="align-items: center;">
+                  <mat-checkbox [(ngModel)]="optimizationDto.mutation"
+                                formControlName="mutation">Mutation rate
+                  </mat-checkbox>&nbsp;
+                  <span class="slider-number">0</span>
+                  <mat-slider
+                    [disabled]="false"
+                    [invert]="false"
+                    [max]="1"
+                    [min]="0"
+                    formControlName="mutationProbability"
+                    [step]="0.1"
+                    [thumbLabel]="true"
+                    [(ngModel)]="optimizationDto.mutationProbability"
+                    [vertical]="false">
+                  </mat-slider>
+                  <span class="slider-number">1</span>
+                  <mat-error
+                    *ngIf="!optimizationDto.mutation || optimizationDto.mutationProbability <= 0">
+                    The mutation is <strong>required</strong>
+                  </mat-error>
+                </opla-grid-tile>
+              </opla-grid-list>
+              <opla-grid-list>
+                <opla-grid-tile *ngFor="let fmo of optimizationOptions?.mutationOperators">
+                  <mat-checkbox (change)="changeOperators('mutationOperators', fmo, $event.checked)"
+                                [disabled]="!optimizationDto.mutation"
+                                [checked]="fmo !== 'DESIGN_PATTERNS'"
+                                *ngIf="fmo !== 'DESIGN_PATTERNS'">
+                    {{fmo | replaceall:'_':' ' | titlecase}}
+                  </mat-checkbox>
+                </opla-grid-tile>
+              </opla-grid-list>
+            </mat-card>
+          </opla-grid-tile>
+          <opla-grid-tile>
+            <mat-card>
+              <h5>Paths</h5>
+              <mat-form-field>
+                <mat-label>Select the builder</mat-label>
+                <mat-select [(value)]="optimizationDto.architectureBuilder">
+                  <mat-option *ngFor="let alg of optimizationOptions?.architectureBuilders"
+                              [value]="alg">{{alg}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div>
+                <mat-form-field [floatLabel]="floatLabelControl.value">
+                  <mat-label>Select the input PLA</mat-label>
+                  <input matInput placeholder="/home/..." [(ngModel)]="optimizationDto.inputArchitecture"
+                         formControlName="inputArchitecture">
+                  <input hidden (change)="onFileSelected()" #fileInput type="file" multiple directory webkitdirectory
+                         *ngIf="optimizationDto.architectureBuilder == 'PAPYRUS'"
+                         mozdirectory allowdirs id="dir">
+                  <input hidden (change)="onFileSelected()" #fileInput type="file" accept=".smty"
+                         *ngIf="optimizationDto.architectureBuilder != 'PAPYRUS'" id="file">
+                  <button matTooltip="Select the directory of the PLA" mat-button matSuffix mat-icon-button
+                          aria-label="Clear" (click)="selectPLA()">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <button matTooltip="Settings" mat-button matSuffix mat-icon-button
+                          *ngIf="optimizationDto.architectureBuilder === 'PAPYRUS'"
+                          aria-label="Settings" (click)="papyrusSettings()">
+                    <mat-icon>settings</mat-icon>
+                  </button>
+                  <mat-error *ngIf="formGroup.get('inputArchitecture').hasError('required')">
+                    The PLA is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-card>
+          </opla-grid-tile>
+        </opla-grid-list>
+      </form>
+    </div>
+  </opla-grid-tile>
+</opla-grid-list>

@@ -1,0 +1,11 @@
+.classpath
+.project
+.settings/
+/target/
+**/nb-configuration.xml
+
+.idea/
+*.iml
+node_modules
+.vscode/
+modules/opla-front/.angular

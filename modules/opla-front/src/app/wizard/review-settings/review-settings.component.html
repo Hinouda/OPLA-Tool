@@ -1,0 +1,16 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Review Settings</h2>
+    <div class="content">
+      <p><strong>Algorithm:</strong> {{ algorithm }}</p>
+      <p><strong>Number of Runs:</strong> {{ runs }}</p>
+      <p><strong>Number of Fitness Evaluations:</strong> {{ evaluations }}</p>
+      <p><strong>Population Size:</strong> {{ population }}</p>
+    </div>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

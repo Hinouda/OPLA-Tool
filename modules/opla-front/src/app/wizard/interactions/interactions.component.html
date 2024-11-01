@@ -1,0 +1,31 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Optimization Settings</h2>
+    <div class="content">
+      <mat-checkbox [(ngModel)]="interact">Interact during the optimization</mat-checkbox>
+      <label>Clustering Algorithm</label>
+      <mat-select [(ngModel)]="clusteringAlgorithm">
+        <mat-option value="KMEANS">KMEANS</mat-option>
+        <mat-option value="DBSCAN">DBSCAN</mat-option>
+      </mat-select>
+      <label>Clustering Moment</label>
+      <mat-select [(ngModel)]="clusteringMoment">
+        <mat-option value="INTERACTIVE">INTERACTIVE</mat-option>
+        <mat-option value="POSTERIORI">POSTERIORI</mat-option>
+        <mat-option value="BOTH">BOTH</mat-option>
+        <mat-option value="NONE">NONE</mat-option>
+      </mat-select>
+      <label>Max Interactions</label>
+      <input matInput [(ngModel)]="maxInteractions" type="number">
+      <label>First Interaction</label>
+      <input matInput [(ngModel)]="firstInteraction" type="number">
+      <label>Interval</label>
+      <input matInput [(ngModel)]="interval" type="number">
+    </div>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  

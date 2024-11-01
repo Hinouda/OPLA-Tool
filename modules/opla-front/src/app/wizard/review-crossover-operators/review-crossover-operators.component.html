@@ -1,0 +1,16 @@
+<div class="dialog">
+    <button class="close-button" (click)="closeDialog()">X</button>
+    <h2 class="title">Review Crossover Operators</h2>
+    <div class="content">
+      <p>Crossover rate: {{ crossoverRate }}</p>
+      <p>Feature-driven Crossover: {{ featureDriven ? 'Yes' : 'No' }}</p>
+      <p>Complementary Crossover: {{ complementary ? 'Yes' : 'No' }}</p>
+      <p>Modular Crossover: {{ modular ? 'Yes' : 'No' }}</p>
+    </div>
+    <div class="actions">
+      <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
+    <ng-template #host></ng-template>
+  </div>
+  
