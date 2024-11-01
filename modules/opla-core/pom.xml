@@ -43,6 +43,7 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -60,6 +61,8 @@
             <scope>test</scope>
         </dependency>
 		<dependency>
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 			<groupId>br.ufpr.dinf.gres</groupId>
 			<artifactId>loglog</artifactId>
 		</dependency>
@@ -82,6 +85,7 @@
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
+<<<<<<< HEAD
 	<build>
         <plugins>
             <plugin>
@@ -90,4 +94,6 @@
             </plugin>
         </plugins>
     </build>
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 </project>

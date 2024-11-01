@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {AfterViewInit, Component, OnInit,  ViewChild, ViewContainerRef, Input} from '@angular/core';
+=======
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {OptimizationDto} from "../dto/optimization-dto";
@@ -14,9 +18,13 @@ import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 import {InteractionDialogComponent} from "../dialogs/interaction/interaction-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+<<<<<<< HEAD
 import { InserirPlaJanelaComponent } from '../wizard/inserir-pla-janela/inserir-pla-janela.component';
 import { DialogService } from '../services/dialog.service';
 import { StateService } from '../services/state.service';
+=======
+
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 @Component({
   selector: 'opla',
   templateUrl: './opla.component.html',
@@ -26,8 +34,11 @@ import { StateService } from '../services/state.service';
   }]
 })
 export class OplaComponent implements OnInit, AfterViewInit {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
   title = 'static';
   isLinear = false;
   papyrusFormGroup: FormGroup;
@@ -42,8 +53,11 @@ export class OplaComponent implements OnInit, AfterViewInit {
   optimizationInfo: OptimizationInfo = OptimizationService.getOptimizationInfo();
   optimizationOptions: any;
   experiments: any;
+<<<<<<< HEAD
   
   selectedFunctions: string[];
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 
   constructor(private _formBuilder: FormBuilder,
               public optimizationService: OptimizationService,
@@ -54,9 +68,13 @@ export class OplaComponent implements OnInit, AfterViewInit {
               public objectiveService: ObjectiveService,
               public experimentConfigurationService: ExperimentConfigurationService,
               public dialog: MatDialog,
+<<<<<<< HEAD
               private snackBar: MatSnackBar, fb: FormBuilder,
               private dialogService: DialogService,
               private stateService: StateService,) {
+=======
+              private snackBar: MatSnackBar, fb: FormBuilder) {
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
     this.executionFormGroup = fb.group({
       mutation: ['', Validators.compose([Validators.required])],
       mutationProbability: ['', Validators.compose([Validators.required])],
@@ -101,8 +119,11 @@ export class OplaComponent implements OnInit, AfterViewInit {
     })
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
   verifyInteraction(optimizationInfo) {
     if (optimizationInfo && optimizationInfo.status === "INTERACT" && !OplaComponent.isOnInteraction) {
       OplaComponent.isOnInteraction = true;
@@ -129,11 +150,16 @@ export class OplaComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+<<<<<<< HEAD
     this.verifyInteraction(this.optimizationInfo);
+=======
+    // this.verifyInteraction(this.optimizationInfo);
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
     this.stepper.selectedIndex = 0;
   }
 
   ngOnInit() {
+<<<<<<< HEAD
     // Verifica os dados no StateService quando o componente é inicializado
     // this.updateSelectedFunctions();
   }
@@ -161,6 +187,9 @@ export class OplaComponent implements OnInit, AfterViewInit {
 
   
   
+=======
+  }
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 
   isRunning() {
     return OptimizationService.isRunning();
@@ -203,6 +232,7 @@ export class OplaComponent implements OnInit, AfterViewInit {
   isValid() {
     return this.optimizationDto.objectiveFunctions.length > 0;
   }
+<<<<<<< HEAD
 
 
   openDialog() {
@@ -215,4 +245,6 @@ export class OplaComponent implements OnInit, AfterViewInit {
     });
   }
   
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 }

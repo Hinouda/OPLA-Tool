@@ -4,6 +4,7 @@ import {LoginComponent} from "./login/login.component";
 import {AppGuardComponent} from "./app.guard.component";
 import {AppComponent} from "./app.component";
 import {OplaComponent} from "./opla/opla.component";
+<<<<<<< HEAD
 import { InserirPlaJanelaComponent } from './wizard/inserir-pla-janela/inserir-pla-janela.component';
 import { ObjectiveFunctionsJanelaComponent } from './wizard/objective-functions-janela/objective-functions-janela.component';
 import { ReviewObjectiveFunctionsComponent } from './wizard/review-objective-functions/review-objective-functions.component';
@@ -30,11 +31,19 @@ const routes: Routes = [
   { path: 'review-mutation-operators', component: ReviewMutationOperatorsComponent },
   { path: 'interactions', component: InteractionsComponent },
   { path: 'review-interactions', component: ReviewInteractionsComponent },
+=======
+
+
+const routes: Routes = [
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
   {path: 'login', component: LoginComponent},
   {path: 'opla', component: OplaComponent, canActivate: [AppGuardComponent]},
   { path: '', redirectTo: '/opla', pathMatch: 'full' },
   { path: '**', component: OplaComponent }
+<<<<<<< HEAD
 
+=======
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
 ];
 
 @NgModule({
@@ -45,4 +54,8 @@ export class AppRoutingModule {
   constructor() {
     console.log("router module")
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47

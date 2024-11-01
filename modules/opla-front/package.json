@@ -2,7 +2,17 @@
   "name": "project",
   "version": "2.1.0-RELEASE",
   "scripts": {
+<<<<<<< HEAD
     "build:copy": "ng build --prod && cp -r dist/opla-front/* ../modules/opla-api/src/main/resources/static/"
+=======
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "gdocs": "compodoc -n 'OPLA-Front Documentation' -d ../../docs/front --theme postmark -p tsconfig.json"
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
   },
   "private": true,
   "dependencies": {
@@ -47,4 +57,8 @@
     "tslint": "^6.1.3",
     "typescript": "~4.6.2"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> df67688fc955e17143ab740d5656f0d0c8cc5b47
